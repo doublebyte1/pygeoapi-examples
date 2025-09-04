@@ -38,4 +38,5 @@ jobs:
 
       - name: Stop and clean up services
         if: always()
+        working-directory: docker/linked-data
         run: docker compose down
