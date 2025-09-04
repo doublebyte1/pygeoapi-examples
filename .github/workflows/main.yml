@@ -3,10 +3,10 @@ name: Docker Compose Integration Test
 on:
   push:
     branches:
-      - main
+      - ld
   pull_request:
     branches:
-      - main
+      - ld
   workflow_dispatch:
 
 jobs:
