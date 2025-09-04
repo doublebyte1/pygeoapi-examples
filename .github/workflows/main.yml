@@ -8,6 +8,11 @@ on:
     branches:
       - ld
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to check out and test'
+        required: true
+        default: 'ld'
 
 jobs:
   test-service:
@@ -16,7 +21,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
+        with:
+          # Use the input from the workflow_dispatch trigger
+          ref: ${{ github.event.inputs.branch }}
+          
       - name: Start services with Docker Compose
         working-directory: docker/linked-data
         run: docker compose up -d
