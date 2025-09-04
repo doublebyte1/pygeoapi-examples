@@ -3,11 +3,11 @@ name: Docker Compose Integration Test
 on:
   push:
     branches:
-      - ld
+      - main
   pull_request:
     branches:
-      - ld
-  workflow_dispatch: 
+      - main
+  workflow_dispatch:
 
 jobs:
   test-service:
@@ -18,10 +18,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Start services with Docker Compose
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait for services to be ready
-        run: sleep 5
+        run: sleep 15 # Adjust the sleep time as needed for your services to initialize
 
       - name: Run curl command to test the service
         run: |
@@ -29,4 +29,4 @@ jobs:
 
       - name: Stop and clean up services
         if: always()
-        run: docker-compose down
+        run: docker compose down
